@@ -1,2 +1,4 @@
-server="localhost"
+server="mongodb-rh:27017"
 database="movies_db"
+username="mongo"
+password="mongo"

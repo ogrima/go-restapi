@@ -19,6 +19,14 @@ func init() {
 
 	dao.Server = config.Server
 	dao.Database = config.Database
+	dao.Username = config.Username
+	dao.Password = config.Password
+
+	fmt.Println(dao.Server)
+	fmt.Println(dao.Database)
+	fmt.Println(dao.Username)
+	fmt.Println(dao.Password)
+	
 	dao.Connect()
 }
 

@@ -2,6 +2,8 @@ package dao
 
 import (
 	"log"
+	"fmt"
+	"time"
 
 	. "github.com/ogrima/go-restapi/models"
 	mgo "gopkg.in/mgo.v2"
@@ -11,19 +13,36 @@ import (
 type MoviesDAO struct {
 	Server   string
 	Database string
+	Username string
+	Password string
 }
 
 var db *mgo.Database
 
 const (
 	COLLECTION = "movies"
+	hosts      = "mongodb-rh:27017"
+    database   = "movies_db"
+    username   = "mongo"
+    password   = "mongo"
 )
 
 func (m *MoviesDAO) Connect() {
-	session, err := mgo.Dial(m.Server)
+
+	info := &mgo.DialInfo{
+        Addrs:    []string{hosts},
+        Timeout:  60 * time.Second,
+        Database: database,
+        Username: username,
+        Password: password,
+    }
+
+	//session, err := mgo.Dial(m.Server)
+	session, err := mgo.DialWithInfo(info)
 	if err != nil {
 		log.Fatal(err)
 	}
+	fmt.Println("Ultimo Passo.")
 	db = session.DB(m.Database)
 }
 
